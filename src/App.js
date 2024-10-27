@@ -5,7 +5,7 @@ import API from './Service/apis';
 function App() {
 
   useEffect(() => {
-    API.get('/apis')
+    API.get('/categories/get-categories')
     .then(res => console.log(res.data))
   }, [])
 
