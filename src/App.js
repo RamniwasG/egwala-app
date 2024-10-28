@@ -1,21 +1,23 @@
-import { useEffect } from 'react';
-import './App.css';
-import API from './Service/apis';
+import React from 'react';
+import { RouterProvider } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import './App.css'
+import routes from './MainRoutes';
 
-function App() {
-
-  useEffect(() => {
-    API.get('/categories/get-categories')
-    .then(res => console.log(res.data))
-  }, [])
-
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome to eGwala App</h1>
-      </header>
-    </div>
+    <RouterProvider router={routes}>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    </RouterProvider>
   );
 }
-
-export default App;
