@@ -15,3 +15,7 @@
     background-attachment: fixed;
     background-position: center; 
 }
+.landing-page-info {
+    position: absolute;
+    text-align: center;
+}
