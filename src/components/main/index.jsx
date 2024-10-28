@@ -1,10 +1,11 @@
-import { Box } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import RestAPI from '../../Services/apis';
 import SideDrawer from './sidedrawer';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DashboardCubeIcon from './../../assets/images/dashboard_cube.png'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import './main.css';
+import MyAppBar from './appbar';
 
 const HomePage = () => {
 
@@ -22,7 +23,7 @@ const HomePage = () => {
     return <Box className="d-f fd-c" p={2} sx={{boxSizing: 'border-box'}}>
         <Box className='d-f fd-r' justifyContent='space-between' width="100%">
             <SideDrawer />
-            <AccountCircleIcon fontSize='large' />
+            <MyAppBar />
         </Box>
         <Box component="h2">Dashboard</Box>
         <img src={DashboardCubeIcon} width="100%" height="340px" alt="dashboard data chart" />
@@ -33,6 +34,10 @@ const HomePage = () => {
             <Box mb={.5}>(milk + water)</Box>
             <Box color="lightgrey">1 cane = 20 ltr.</Box>
         </Box>
+        <Button color='secondary' variant='contained'
+            sx={{position: 'relative', marginTop: '2rem'}}>
+            <AddCircleOutlineIcon /> &nbsp;Add new customer
+        </Button>
     </Box>
 }
 
