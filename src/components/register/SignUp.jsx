@@ -6,6 +6,7 @@ import InputField from '../reuseable/TextField';
 import egwalaLogo from './../../assets/images/landing_page_3.gif'
 import InputSelect from '../reuseable/InputSelect';
 import RestAPI from './../../Services/apis/index'
+import { showErrorMessage, showSuccessMessage } from '../reuseable/Toaster';
 
 const roleOptions = [
     { text: 'Seller', value: 'seller' },
@@ -37,9 +38,11 @@ const SignUp = () => {
         })
         .then(res => {
             console.log(res.data)
+            showSuccessMessage('You have successfully registered. Please Sign In now')
             navigate('/signin')
         }).catch(err => {
             console.log(err)
+            showErrorMessage(err.message)
         })
     }
 
