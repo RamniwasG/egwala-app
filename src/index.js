@@ -6,6 +6,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import './index.css';
 import './styles/common.css';
+import "react-image-gallery/styles/css/image-gallery.css";
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
