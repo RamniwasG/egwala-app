@@ -1,27 +1,47 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Layout from '../Layout';
-import API from '../../Services/apis';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
+import { Form } from 'react-router-dom';
+import InputField from '../reuseable/TextField';
+import egwalaLogo from './../../assets/images/landing_page_3.gif'
 
 const SignIn = () => {
 
-    const [users, setUsers] = useState([]);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-    useEffect(() => {
-        API.get('/users/all')
-        .then(res => {
-            setUsers(res.data)
-        }).catch(err => {
-            console.log(err)
-            alert(JSON.stringify(err))
-        })
-    }, [])
+    const  handleSubmit = (e) => {
+        console.log(e)
+        e.preventDefault();
+        console.log({username, password})
+    }
 
     return <Layout>
-        <Box className="d-f fd-c">
-            <Box component="h2">SignIn Page</Box>
-            <b>Users: ({users.length})</b>
-            {JSON.stringify(users)}
+        <Box className="d-f fd-c" p={3}>
+            <img src={egwalaLogo} width="30%" height="100px" style={{borderRadius: '50%'}} alt="egwala-logo" />
+            <Box component="h2">Login</Box>
+            <Form onSubmit={handleSubmit}>
+                <InputField
+                    label="Username"
+                    id="username"
+                    name="username"
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                <InputField
+                    label="Password"
+                    id="password"
+                    name="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <Button type="submit" variant='contained' fullWidth sx={{backgroundColor: '#FF3333'}}>SignIn</Button>
+            </Form>
+            <Box component="p">
+                Don't have account,<Button href="/signup">SignUp</Button> here
+            </Box>
         </Box>
     </Layout>
 }
