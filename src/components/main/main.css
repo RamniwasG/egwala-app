@@ -1,0 +1,19 @@
+.title-text {
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+}
+.total-amounts {
+    top: 27%;
+}
+.total-customers {
+    top: 42%;
+    left: 10%;
+    transform: rotate(25deg);
+}
+.total-quantites {
+    top: 39%;
+    right: 10%;
+    transform: rotate(-27deg);
+}
