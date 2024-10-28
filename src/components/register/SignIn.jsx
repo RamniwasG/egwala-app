@@ -10,8 +10,11 @@ const SignIn = () => {
     useEffect(() => {
         API.get('/users/all')
         .then(res => {
-            console.log(res.data)
+            alert(res.data)
             setUsers(res.data)
+        }).catch(err => {
+            console.log(err)
+            alert(JSON.stringify(err))
         })
     }, [])
 
