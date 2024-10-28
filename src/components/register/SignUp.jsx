@@ -1,23 +1,29 @@
 import React, { useState } from 'react'
 import Layout from '../Layout';
 import { Box, Button } from '@mui/material';
-import { Form } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import InputField from '../reuseable/TextField';
 import egwalaLogo from './../../assets/images/landing_page_3.gif'
+import InputSelect from '../reuseable/InputSelect';
 
+const roleOptions = [
+    { text: 'Seller', value: 'seller' },
+    { text: 'Buyer', value: 'buyer' }
+]
 const SignUp = () => {
-
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
-    const [cpassword, setcPassword] = useState('');
+    const [selectedRole, setSelectedRole] = useState('buyer');
+
+    const navigate = useNavigate();
 
     const  handleSubmit = (e) => {
         console.log(e)
         e.preventDefault();
-        console.log({username: firstname + " " + lastname, email, phone, password, cpassword})
+        console.log({username: firstname + " " + lastname, email, phone, password, selectedRole})
     }
 
     return <Layout>
@@ -25,22 +31,24 @@ const SignUp = () => {
             <img src={egwalaLogo} width="30%" height="100px" style={{borderRadius: '50%'}} alt="egwala-logo" />
             <Box component="h2">SignUp</Box>
             <Form onSubmit={handleSubmit}>
-                <InputField
-                    label="First Name"
-                    id="firstname"
-                    name="firstname"
-                    type="text"
-                    value={firstname}
-                    onChange={(e) => setFirstname(e.target.value)}
-                />
-                <InputField
-                    label="Last Name"
-                    id="lastname"
-                    name="lastname"
-                    type="text"
-                    value={lastname}
-                    onChange={(e) => setLastname(e.target.value)}
-                />
+                <Box className="d-f fd-r" gap={1}>
+                    <InputField
+                        label="First Name"
+                        id="firstname"
+                        name="firstname"
+                        type="text"
+                        value={firstname}
+                        onChange={(e) => setFirstname(e.target.value)}
+                    />
+                    <InputField
+                        label="Last Name"
+                        id="lastname"
+                        name="lastname"
+                        type="text"
+                        value={lastname}
+                        onChange={(e) => setLastname(e.target.value)}
+                    />
+                </Box>
                 <InputField
                     label="Email"
                     id="email"
@@ -53,7 +61,7 @@ const SignUp = () => {
                     label="Phone"
                     id="phone"
                     name="phone"
-                    type="phone"
+                    type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                 />
@@ -65,18 +73,18 @@ const SignUp = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <InputField
-                    label="Confirm Password"
-                    id="cpassword"
-                    name="cpassword"
-                    type="password"
-                    value={cpassword}
-                    onChange={(e) => setcPassword(e.target.value)}
+                <InputSelect
+                    label="Role"
+                    labelId='role-label'
+                    id="role"
+                    selectedValue={selectedRole}
+                    options={roleOptions}
+                    onChange={(e) => setSelectedRole(e.target.value)}
                 />
                 <Button type="submit" variant='contained' fullWidth sx={{backgroundColor: '#FF3333'}}>SignUp</Button>
             </Form>
             <Box component="p">
-                Already have account,<Button href="/signin">SignIn</Button> here
+                Already have an account,<Button onClick={(e) => navigate("/signin")}>SignIn</Button> here
             </Box>
         </Box>
     </Layout>

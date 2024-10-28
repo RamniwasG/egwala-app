@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import Layout from '../Layout';
 import { Box, Button } from '@mui/material';
-import { Form } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import InputField from '../reuseable/TextField';
 import egwalaLogo from './../../assets/images/landing_page_3.gif'
 
 const SignIn = () => {
-
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate();
+
     const  handleSubmit = (e) => {
-        console.log(e)
         e.preventDefault();
         console.log({username, password})
     }
@@ -40,7 +40,7 @@ const SignIn = () => {
                 <Button type="submit" variant='contained' fullWidth sx={{backgroundColor: '#FF3333'}}>SignIn</Button>
             </Form>
             <Box component="p">
-                Don't have account,<Button href="/signup">SignUp</Button> here
+                Don't have account,<Button onClick={(e) => navigate("/signup")}>SignUp</Button> here
             </Box>
         </Box>
     </Layout>
