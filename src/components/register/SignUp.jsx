@@ -5,6 +5,7 @@ import { Form, useNavigate } from 'react-router-dom';
 import InputField from '../reuseable/TextField';
 import egwalaLogo from './../../assets/images/landing_page_3.gif'
 import InputSelect from '../reuseable/InputSelect';
+import RestAPI from './../../Services/apis/index'
 
 const roleOptions = [
     { text: 'Seller', value: 'seller' },
@@ -21,9 +22,25 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const  handleSubmit = (e) => {
-        console.log(e)
         e.preventDefault();
-        console.log({username: firstname + " " + lastname, email, phone, password, selectedRole})
+        const payload = {
+            username: firstname + " " + lastname,
+            email, phone, 
+            password,
+            isSeller: selectedRole === 'seller' ? true : false
+        }
+        console.log(payload)
+        RestAPI.post('/users/signup', payload, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => {
+            console.log(res.data)
+            navigate('/signin')
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     return <Layout>

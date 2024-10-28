@@ -4,6 +4,7 @@ import { Box, Button } from '@mui/material';
 import { Form, useNavigate } from 'react-router-dom';
 import InputField from '../reuseable/TextField';
 import egwalaLogo from './../../assets/images/landing_page_3.gif'
+import RestAPI from '../../Services/apis';
 
 const SignIn = () => {
     const [username, setUsername] = useState('');
@@ -13,7 +14,13 @@ const SignIn = () => {
 
     const  handleSubmit = (e) => {
         e.preventDefault();
-        console.log({username, password})
+        RestAPI.post('/users/signin', { email: username, password })
+        .then(res => {
+            console.log(res.data)
+            navigate('/home')
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     return <Layout>

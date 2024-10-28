@@ -1,9 +1,9 @@
 import axios from "axios";
 
-axios.defaults.baseURL = 'http://13.233.236.82:5002/api'; // 'localhost'
+axios.defaults.baseURL = 'http://localhost:5002/api'; // '13.233.236.82'
 axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
-const API = axios;
+const RestAPI = axios;
 
-export default API;
+export default RestAPI;
