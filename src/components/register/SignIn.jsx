@@ -5,6 +5,7 @@ import { Form, useNavigate } from 'react-router-dom';
 import InputField from '../reuseable/TextField';
 import egwalaLogo from './../../assets/images/landing_page_3.gif'
 import RestAPI from '../../Services/apis';
+import { showSuccessMessage } from '../reuseable/Toaster';
 
 const SignIn = () => {
     const [username, setUsername] = useState('');
@@ -17,6 +18,7 @@ const SignIn = () => {
         RestAPI.post('/users/signin', { email: username, password })
         .then(res => {
             console.log(res.data)
+            showSuccessMessage('Login successful.', 'bottom')
             navigate('/home')
         }).catch(err => {
             console.log(err)
