@@ -10,7 +10,6 @@ const SignIn = () => {
     useEffect(() => {
         API.get('/users/all')
         .then(res => {
-            alert(res.data)
             setUsers(res.data)
         }).catch(err => {
             console.log(err)
@@ -21,7 +20,7 @@ const SignIn = () => {
     return <Layout>
         <Box className="d-f fd-c">
             <Box component="h2">SignIn Page</Box>
-            <b>Users List: {users.length}</b>
+            <b>Users: ({users.length})</b>
             {JSON.stringify(users)}
         </Box>
     </Layout>
