@@ -6,6 +6,7 @@ import InputField from '../reuseable/TextField';
 import egwalaLogo from './../../assets/images/landing_page_3.gif'
 import RestAPI from '../../Services/apis';
 import { showErrorMessage } from '../reuseable/Toaster';
+import { setAuthToken, setAuthUser } from './../../utils'
 
 const SignIn = () => {
     const [username, setUsername] = useState('');
@@ -17,11 +18,13 @@ const SignIn = () => {
         e.preventDefault();
         RestAPI.post('/users/signin', { email: username, password })
         .then(res => {
-            console.log(res.data)
+            setAuthUser(res.data)
+            setAuthToken(res.data.token, res.data.refresh)
             navigate('/home')
         }).catch(err => {
             console.log(err)
             showErrorMessage(err.message)
+            navigate('/home') // just for testing purpose only
         })
     }
 

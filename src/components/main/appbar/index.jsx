@@ -6,11 +6,16 @@ import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { getAuthUser } from '../../../utils';
 
 const settings = ['Profile', 'Account', 'Logout'];
 
 function MyAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+    let loggedInUser = getAuthUser();
+    if(loggedInUser) {
+        loggedInUser = JSON.parse(loggedInUser) || null;
+    }
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -24,7 +29,9 @@ function MyAppBar() {
     <Box sx={{ flexGrow: 0 }}>
         <Tooltip title="Open settings">
             <Box className="d-f fd-r">
-                <Box sx={{fontSize: '12px', marginRight: '4px'}}>Hello, <b>{'' || 'Raman'}</b></Box>
+                <Box sx={{fontSize: '12px', marginRight: '4px'}}>
+                    Hello, <b>{(loggedInUser && loggedInUser.username?.split(" ")[0]) || 'Raman'}</b>
+                </Box>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <AccountCircleIcon fontSize='large' />
                 </IconButton>
