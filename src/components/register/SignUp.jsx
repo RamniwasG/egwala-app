@@ -28,7 +28,7 @@ const SignUp = () => {
             username: firstname + " " + lastname,
             email, phone, 
             password,
-            isSeller: selectedRole === 'seller' ? true : false
+            roles: [selectedRole]
         }
         console.log(payload)
         RestAPI.post('/users/signup', payload, {

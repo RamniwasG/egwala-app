@@ -12,6 +12,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import MenuIcon from '@mui/icons-material/Menu';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { useNavigate } from 'react-router-dom';
+import { clearLocalStorage } from '../../../utils';
 
 export default function SideDrawer() {
   const [open, setOpen] = React.useState(false);
@@ -39,7 +40,10 @@ export default function SideDrawer() {
         ))}
         <Divider />
         <ListItemButton>
-            <ListItemText primary={'Logout'} onClick={() => navigate('/signin')} sx={{textAlign: 'center'}} />
+            <ListItemText primary={'Logout'} onClick={() => {
+              clearLocalStorage();
+              navigate('/signin')
+            }} sx={{textAlign: 'center'}} />
         </ListItemButton>
       </List>
     </Box>
