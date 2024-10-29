@@ -24,7 +24,7 @@ const SignIn = () => {
         }).catch(err => {
             console.log(err)
             showErrorMessage(err.message)
-            navigate('/home') // just for testing purpose only
+            navigate('/home')
         })
     }
 
