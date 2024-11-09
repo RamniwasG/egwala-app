@@ -8,8 +8,12 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import './main.css';
 import MyAppBar from './appbar';
 import { getAuthUser } from '../../utils';
+import CustomModal from '../reuseable/CustomModal';
+import AddNewRecord from './AddNewRecord';
+import CustomTable from '../reuseable/CustomTable';
 
 const HomePage = () => {
+    const [addNewRecord, setAddNewRecord] = useState(false);
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
@@ -32,35 +36,50 @@ const HomePage = () => {
     } :  {
         top: '39%', right: '10%', transform: 'rotate(-27deg)'
     }
-    return <Box className="d-f fd-c" p={2} sx={{boxSizing: 'border-box'}}>
-        <Box className='d-f fd-r' justifyContent='space-between' width="100%">
-            <SideDrawer />
-            <MyAppBar />
-        </Box>
-        <Box component="h2">Dashboard</Box>
-        {userType === 'seller' && 
-            <img src={DashboardCubeIcon} width="100%" height="340px" alt="seller dashboard data chart" />
-        }
-        {userType === 'buyer' &&
-            <Box className="d-f fd-c" justifyContent="space-between" mt={2}>
-                <img src={BuyerDashboardIcon} width="100%" height="160px" alt="buyer total amount" />
-                <img src={BuyerDashboardIcon} width="100%" height="160px" alt="buyer total quantities" />
-            </Box>
-        }
-        <Box component="span" className='title-text total-amounts'>Total amounts = 0</Box>
-        {userType === 'seller' && <Box component="span" className='title-text total-customers'>Total customers = {users.length}</Box>}
-        <Box component="span" className='title-text total-quantites' textAlign="center"
-            sx={{...buyerQuantityStyle}}
+    return <>
+        <CustomModal
+            open={addNewRecord}
+            closeModal={setAddNewRecord}
+            aria-labelledby="add-new-record"
+            aria-describedby="add-new-milk-record"
         >
-            <Box mb={.5}>Total quantities = 0</Box>
-            <Box mb={.5} fontSize={11}>(milk + water)</Box>
-            <Box color="lightgrey" fontSize={11}>1 cane = 20 ltr.</Box>
+            <AddNewRecord closeModal={setAddNewRecord} userType={userType} id={user._id} />
+        </CustomModal>
+        <Box className="d-f fd-c" p={2} sx={{boxSizing: 'border-box'}}>
+            <Box className='d-f fd-r' justifyContent='space-between' width="100%">
+                <SideDrawer />
+                <MyAppBar />
+            </Box>
+            <Box component="h2">Dashboard</Box>
+            {userType === 'seller' && 
+                <img src={DashboardCubeIcon} width="100%" height="340px" alt="seller dashboard data chart" />
+            }
+            {userType === 'buyer' &&
+                <Box className="d-f fd-c" justifyContent="space-between" mt={2}>
+                    <img src={BuyerDashboardIcon} width="100%" height="160px" alt="buyer total amount" />
+                    <img src={BuyerDashboardIcon} width="100%" height="160px" alt="buyer total quantities" />
+                </Box>
+            }
+            <Box component="span" className='title-text total-amounts'>Total amounts = 0</Box>
+            {userType === 'seller' && <Box component="span" className='title-text total-customers'>Total customers = {users.length}</Box>}
+            <Box component="span" className='title-text total-quantites' textAlign="center"
+                sx={{...buyerQuantityStyle}}
+            >
+                <Box mb={.5}>Total quantities = 0</Box>
+                <Box mb={.5} fontSize={11}>(milk + water)</Box>
+                <Box color="lightgrey" fontSize={11}>1 cane = 20 ltr.</Box>
+            </Box>
+            <Button color='secondary' variant='contained'
+                sx={{position: 'relative', marginTop: '2rem'}}
+                onClick={() => setAddNewRecord(!addNewRecord)}
+            >
+                <AddCircleOutlineIcon /> &nbsp;Add {userType === 'seller' ? 'new customer' : 'new record'}
+            </Button>
+            {userType === 'seller' && users.length > 0 &&
+                <CustomTable users={users} />
+            }
         </Box>
-        <Button color='secondary' variant='contained'
-            sx={{position: 'relative', marginTop: '2rem'}}>
-            <AddCircleOutlineIcon /> &nbsp;Add new customer
-        </Button>
-    </Box>
+    </>
 }
 
 export default HomePage;
