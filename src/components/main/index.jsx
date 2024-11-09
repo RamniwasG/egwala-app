@@ -70,7 +70,7 @@ const HomePage = () => {
                 <Box color="lightgrey" fontSize={11}>1 cane = 20 ltr.</Box>
             </Box>
             <Button color='secondary' variant='contained'
-                sx={{position: 'relative', marginTop: '2rem'}}
+                sx={{position: 'relative', margin: '1rem'}}
                 onClick={() => setAddNewRecord(!addNewRecord)}
             >
                 <AddCircleOutlineIcon /> &nbsp;Add {userType === 'seller' ? 'new customer' : 'new record'}

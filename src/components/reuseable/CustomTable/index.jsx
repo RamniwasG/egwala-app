@@ -28,13 +28,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(username, role, email) {
-  return { username, role, email };
+function createData(username, role, phone) {
+  return { username, role, phone };
 }
 
 export default function CustomTable(props) {
 
-  const rows = props?.users.map((user) => createData(user.username, user.roles[0], user.email))
+  const rows = props?.users.map((user) => createData(user.username, user.roles[0], user.phone))
 
   return (
     <TableContainer component={Paper} sx={{p: 1.5}}>
@@ -42,8 +42,8 @@ export default function CustomTable(props) {
         <TableHead>
           <TableRow>
             <StyledTableCell>Username</StyledTableCell>
-            <StyledTableCell align="right">Role</StyledTableCell>
-            <StyledTableCell align="right">Email</StyledTableCell>
+            <StyledTableCell>Role</StyledTableCell>
+            <StyledTableCell>Email</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -53,7 +53,7 @@ export default function CustomTable(props) {
                 {row.username}
               </StyledTableCell>
               <StyledTableCell align="right">{row.role}</StyledTableCell>
-              <StyledTableCell align="right">{row.email}</StyledTableCell>
+              <StyledTableCell>{row.phone}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

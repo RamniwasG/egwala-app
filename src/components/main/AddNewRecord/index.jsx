@@ -51,7 +51,7 @@ const AddNewRecord = (props) => {
 
     
     return <Box className="d-f fd-c">
-        <Box component="h2" textAlign="center">Add New Record</Box>
+        <Box component="h2" textAlign="center" mb={4}>Add New Record</Box>
         <Form className='w-100' onSubmit={handleSubmit}>
             <Box className="d-f fd-c" gap={1}>
                 <InputSelect
@@ -67,7 +67,7 @@ const AddNewRecord = (props) => {
                     handleDateChange={(date) => setNewRecord({ ...record, created_at: date })}
                 />
                 <InputField
-                    label="Quantity"
+                    label="Quantity(Ltr)"
                     id="quantity"
                     name="quantity"
                     type="number"
@@ -75,7 +75,7 @@ const AddNewRecord = (props) => {
                     onChange={(e) => setNewRecord({ ...record, quantity: e.target.value })}
                 />
                 <InputField
-                    label="Price"
+                    label="Price(Rs)"
                     id="price"
                     name="price"
                     type="number"
@@ -83,8 +83,10 @@ const AddNewRecord = (props) => {
                     onChange={(e) => setNewRecord({ ...record, price: e.target.value })}
                 />
             </Box>
-                
-            <Button type="submit" variant='contained' fullWidth sx={{backgroundColor: '#FF3333'}}>Submit</Button>
+            <Box className='d-f fd-r' justifyContent="space-evenly" m={2}> 
+                <Button type="button" variant='contained' sx={{width:'40%', backgroundColor: '#FF0000'}}>Cancel</Button>
+                <Button type="submit" variant='contained' sx={{width:'40%', backgroundColor: '#006600'}}>Save</Button>
+            </Box>
         </Form>
     </Box>
 }
